@@ -1,7 +1,4 @@
-#Load model
 import transformers, torch
-
-torch.cuda.empty_cache()
 
 compute_dtype = torch.float16
 cache_path    = ''
@@ -12,10 +9,6 @@ model         = transformers.AutoModelForCausalLM.from_pretrained(model_id, torc
                                                                   device_map=device)
 tokenizer     = transformers.AutoTokenizer.from_pretrained(model_id, cache_dir=cache_path)
 
-
-model = model.half()
-
-#Set Prompt format
 instruction_template = "### Human: "
 response_template    = "### Assistant: "
 def prompt_format(prompt):
@@ -31,5 +24,5 @@ def generate(prompt, max_length=500):
     text        = tokenizer.batch_decode(outputs[:,:-1])[0]
     return text
 
-#Generate
-print(generate(input("prompt: ")))
+while True:
+    print(generate(input("prompt: ")))
