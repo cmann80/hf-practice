@@ -2,7 +2,6 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 import streamlit as st
 
-
 torch.cuda.empty_cache()
 
 def generation_function(prompt: str) -> str:
